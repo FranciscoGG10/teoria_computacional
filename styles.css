@@ -1,0 +1,60 @@
+header {
+    background-color:  #211e25;
+    color: #fff;
+    padding: 25px;
+    text-align: left;
+}
+
+body {
+    font-family: "Rokkitt", serif;
+    font-weight:400;
+    font-size: large;
+}
+
+h1 {
+    font-family: "Vast Shadow", serif;
+    font-weight: 400;
+    font-size:xx-large ;
+    margin-top: -10px;
+}
+
+button {
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 10px 30px; 
+    border: none; 
+    
+    background-color: #ff7f50; 
+    color: white; 
+
+    font-family: "Rokkitt", serif;
+    font-weight:500;
+
+    transition: background-color 0.3s ease; 
+}
+
+button:hover {
+    background-color: #f54462;
+}
+
+#relacionOutput, #lenguajesOutput, #diferenciaOutput, #potenciaOutput, #placaOutput {
+    font-weight: bold; 
+    color: #4c316b; 
+}
+
+footer { 
+    margin-top: 20px;
+    padding: 20px;
+    width:100%;
+
+    background-color:  #211e25; 
+    color: white; 
+}
+
+ul {
+    list-style-type:square; 
+}
+
+li {
+    margin-bottom: 5px; 
+}

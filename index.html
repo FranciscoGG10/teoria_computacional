@@ -1,10 +1,80 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Documento sin título</title>
-</head>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Práctica 1</title>
+    </head>
 
-<body>
-</body>
+    <body>
+        <header>
+            <h2>Práctica 1:</h2> 
+            <h1>Alfabetos, lenguajes y expresiones regulares </h1>
+
+            <script src="script.js"></script>
+            <link rel="stylesheet" href="styles.css">    
+
+            <!--tipografias-->
+            <link href="https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&family=Vast+Shadow&display=swap" rel="stylesheet">
+
+        </header>        
+
+        <h3>1. Leer el alfabeto</h3>
+            <label for="alfabetoInput">Ingrese el alfabeto (por comas o en rango):</label>
+            <input type="text" id="alfabetoInput"><br>
+
+            <button onclick="validarAlfabeto()">Validar Alfabeto</button>
+
+        <h3>2. Leer dos cadenas</h3>
+            <label for="cadena1Input">Cadena 1:</label>
+            <input type="text" id="cadena1Input"><br>
+
+            <label for="cadena2Input">Cadena 2:</label>
+            <input type="text" id="cadena2Input"><br>
+
+            <button onclick="validarCadenas()">Validar Cadenas</button>
+
+        <h3>3. Relación entre cadenas</h3>
+            <div id="relacionOutput"></div>
+
+        <h3>4. Generar lenguajes aleatorios</h3>
+            <label for="numElementosInput">Número de palabras a generar:</label>
+            <input type="number" id="numElementosInput"><br>
+
+            <label for="longitudInput">Longitud de las palabras:</label>
+            <input type="number" id="longitudInput"><br>
+
+            <button onclick="generarlenguajes()">Generar Lenguajes</button>
+
+            <div id="lenguajesOutput"></div>
+
+        <h3>5. Generar lenguaje de diferencia</h3>
+            <button onclick="diferenciaLenguajes()">Generar Diferencia</button>
+            <div id="diferenciaOutput"></div>
+
+        <h3>6. Obtener la potencia del alfabeto</h3>
+            <label for="potenciaInput">Potencia del alfabeto:</label>
+            <input type="number" id="potenciaInput"><br>
+
+            <button onclick="calcularPotencia()">Calcular Potencia</button>
+            <div id="potenciaOutput"></div>
+
+        <h3>7. Validar placa de circulación</h3>
+            <label for="placaInput">Ingrese una placa de circulación:</label>
+            <input type="text" id="placaInput"><br>
+
+            <button onclick="validarPlaca()">Validar Placa</button>
+            <div id="placaOutput"></div>
+    </body>
+
+    <footer>
+        Grupo: 4CM4<br><br>
+        Alumnos:
+        <ul>
+            <li>García García Francisco</li>
+            <li>Guevara Badillo Areli Alejandra</li>
+        </ul>
+    </footer>
+    
 </html>
