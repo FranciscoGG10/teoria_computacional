@@ -25,7 +25,11 @@
             <label for="alfabetoInput">Ingrese el alfabeto (por comas o en rango):</label>
             <input type="text" id="alfabetoInput"><br>
 
-            <button onclick="validarAlfabeto()">Validar Alfabeto</button>
+            <button onclick="validarAlfabeto()">Validar Alfabeto</button><br>
+	
+		<h4>1.1. Mostrar alfabeto generado</h4>
+			<button onclick="mostrarAlfabeto()">Ver Alfabeto Generado</button>
+			<br><br><div id="alfabetocompleto"></div>
 
         <h3>2. Leer dos cadenas</h3>
             <label for="cadena1Input">Cadena 1:</label>
@@ -58,10 +62,12 @@
 
         <h3>6. Obtener la potencia del alfabeto</h3>
             <label for="potenciaInput">Potencia del alfabeto:</label>
-            <input type="number" id="potenciaInput"><br>
+            <input type="number" id="potenciaInput" min="-5" max="5"><br>
 
             <button onclick="calcularPotencia()">Calcular Potencia</button>
             <div id="potenciaOutput"></div>
+			<br>
+			<div id="resultadop"></div>
 
         <h3>7. Validar placa de circulación</h3>
             <label for="placaInput">Ingrese una placa de circulación:</label>
