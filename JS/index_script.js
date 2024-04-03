@@ -4,13 +4,13 @@ function validarAlfabeto() {
     // Si no se ingresa nada en el campo "Leer el alfabeto", asignar λ como alfabeto base
     var alfabeto = alfabetoInput === "" ? "λ" : alfabetoInput;
     // Expresión regular para validar el formato del alfabeto
-    var regex = /^([a-zA-Z0-9]-[a-zA-Z0-9]|([a-zA-Z0-9],)+[a-zA-Z0-9])$/;
+	var regex = /^(?!a-a|A-A|b-b|B-B|c-c|C-C|d-d|D-D|e-e|E-E|f-f|F-F|g-g|G-G|h-h|H-H|i-i|I-I|j-j|J-J|k-k|K-K|l-l|L-L|m-m|M-M|n-n|N-N|ñ-ñ|Ñ-Ñ|o-o|O-O|p-p|P-P|q-q|Q-Q|r-r|R-R|s-s|S-S|t-t|T-T|u-u|U-U|v-v|V-V|w-w|W-W|x-x|X-X|y-y|Y-Y|z-z|Z-Z|0-0|1-1|2-2|3-3|4-4|5-5|6-6|7-7|8-8|9-9|a-b|A-B|b-c|B-C|c-d|C-D|d-e|D-E|e-f|E-F|f-g|F-G|g-h|G-H|h-i|H-I|i-j|I-J|j-k|J-K|k-l|K-L|l-m|L-M|m-n|M-N|n-o|N-O|o-p|O-P|p-q|P-Q|q-r|Q-R|r-s|R-S|s-t|S-T|t-u|T-U|u-v|U-V|v-w|V-W|w-x|W-X|x-y|X-Y|y-z|Y-Z|1-2|2-3|3-4|4-5|5-6|6-7|7-8|8-9)([a-zA-Z0-9]-[a-zA-Z0-9]|([a-zA-Z0-9],)+([a-zA-Z0-9],)+[a-zA-Z0-9])$/;
 
     // Verificar si el alfabeto cumple con el formato establecido por la expresión regular
     if (regex.test(alfabeto)) {
         alert("El alfabeto ingresado es válido.");
     } else {
-        alert("El alfabeto ingresado no es válido. Por favor, ingrese valores separados por comas o un rango (n-m).");
+        alert("El alfabeto ingresado no es válido. Por favor, ingrese valores separados por comas o un rango mayor a 2 caracteres o digitos.");
     }
 	
 }
