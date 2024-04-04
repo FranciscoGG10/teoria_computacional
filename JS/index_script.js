@@ -1,6 +1,6 @@
-// Variable global para el alfabeto
 var alfabeto;
 
+//Funcion que alerta si el alfabeto es valido o no
 function validarAlfabeto() {
     if (validacion()) {
         alert("El alfabeto ingresado es válido.");
@@ -9,43 +9,48 @@ function validarAlfabeto() {
     }
 }
 
+//Funcion que verifica que el alfabeto sea valido
 function validacion() {
-    // Obtener el valor del alfabeto ingresado por el usuario
-    alfabetoInput = document.getElementById("alfabetoInput").value.trim(); // Asignación del valor a la variable global alfabeto
+    alfabetoInput = document.getElementById("alfabetoInput").value.trim();
 
-    // Si no se ingresa nada en el campo "Leer el alfabeto", asignar λ como alfabeto base
+    // Si no se ingresa nada en el alfabeto asignar λ como alfabeto
     alfabeto = alfabetoInput === "" ? "λ" : alfabetoInput;
 
     // Expresión regular para validar el formato del alfabeto
     var regex = /^(?!a-a|A-A|b-b|B-B|c-c|C-C|d-d|D-D|e-e|E-E|f-f|F-F|g-g|G-G|h-h|H-H|i-i|I-I|j-j|J-J|k-k|K-K|l-l|L-L|m-m|M-M|n-n|N-N|ñ-ñ|Ñ-Ñ|o-o|O-O|p-p|P-P|q-q|Q-Q|r-r|R-R|s-s|S-S|t-t|T-T|u-u|U-U|v-v|V-V|w-w|W-W|x-x|X-X|y-y|Y-Y|z-z|Z-Z|0-0|1-1|2-2|3-3|4-4|5-5|6-6|7-7|8-8|9-9|a-b|A-B|b-c|B-C|c-d|C-D|d-e|D-E|e-f|E-F|f-g|F-G|g-h|G-H|h-i|H-I|i-j|I-J|j-k|J-K|k-l|K-L|l-m|L-M|m-n|M-N|n-o|N-O|o-p|O-P|p-q|P-Q|q-r|Q-R|r-s|R-S|s-t|S-T|t-u|T-U|u-v|U-V|v-w|V-W|w-x|W-X|x-y|X-Y|y-z|Y-Z|1-2|2-3|3-4|4-5|5-6|6-7|7-8|8-9)([a-zA-Z0-9]-[a-zA-Z0-9]|([a-zA-Z0-9],)+([a-zA-Z0-9],)+[a-zA-Z0-9])$/;
 
-    // Verificar si el alfabeto cumple con el formato establecido por la expresión regular
     return regex.test(alfabeto);
 }
 
+//Funcion que imprime el alfabeto con formato
 function mostrarAlfabeto() {
     if (!validacion()) {
         alert("Corrija el alfabeto para poder realizar esta acción.");
         return;
     }
+    var alfabetoSplit = enlistar();
 
+    var alfabetoCompleto = "";
+    alfabetoCompleto += ("Σ = {" + alfabetoSplit.join(', ') + "}");
+    document.getElementById("alfabetocompleto").innerHTML = alfabetoCompleto;
+}
+
+function enlistar(){
+    // Expandir por comas
     var alfabetoSplit = alfabeto.split(',');
 
     // Expandir los rangos en el alfabeto
     for (var i = 0; i < alfabetoSplit.length; i++) {
         if (alfabetoSplit[i].includes("-")) {
-            var rangoExpandido = expandirRango(alfabetoSplit[i]); // Expandir el rango en una cadena completa de caracteres
-            alfabetoSplit.splice(i, 1, ...rangoExpandido.split(',')); // Reemplazar el rango con la cadena expandida en el alfabeto
+            var rangoExpandido = expandirRango(alfabetoSplit[i]); 
+            alfabetoSplit.splice(i, 1, ...rangoExpandido.split(','));
         }
     }
-
-    var alfabetoCompleto = "";
-    alfabetoCompleto += ("Σ = " + alfabetoSplit.join(', ')); // Agregar coma y espacio como separadores
-    document.getElementById("alfabetocompleto").innerHTML = alfabetoCompleto;
+    return alfabetoSplit;
 }
 
+// Función para expandir un rango en una cadena completa de caracteres
 function expandirRango(rango) {
-    // Función para expandir un rango en una cadena completa de caracteres
     var inicio = rango.charCodeAt(0); // Obtener el código ASCII del primer carácter del rango
     var fin = rango.charCodeAt(2); // Obtener el código ASCII del último carácter del rango
     var cadena = "";
@@ -54,40 +59,13 @@ function expandirRango(rango) {
     for (var i = inicio; i <= fin; i++) {
         cadena += String.fromCharCode(i); // Convertir el código ASCII a carácter y agregarlo a la cadena
         if (i < fin) {
-            cadena += ","; // Agregar coma como separador, excepto para el último carácter del rango
+            cadena += ",";
         }
     }
     return cadena;
 }
 
-function validarCadenas() {
-    var cadena1 = document.getElementById("cadena1Input").value.trim();
-    var cadena2 = document.getElementById("cadena2Input").value.trim();
-
-    if (!validacion()) {
-        alert("Corrija el alfabeto para poder realizar esta acción.");
-        return;
-    }
-
-    if (cadena1 === "") {
-        if (cadena2 !== "") {
-            if (!validarCadena(cadena2)) {
-                alert("Una o ambas cadenas contienen símbolos inválidos.");
-                return;
-            }
-        }
-    } else {
-        if (!validarCadena(cadena1) || !validarCadena(cadena2)) {
-            alert("Una o ambas cadenas contienen símbolos inválidos.");
-            return;
-        }
-    }
-
-    // Determinar la relación entre las cadenas
-    var relacion = determinarRelacion(cadena1, cadena2);
-    document.getElementById("relacionOutput").innerHTML = relacion;
-}
-
+//Funcion que vuelve el alfabeto a una cadena
 function convertirAlfabeto() {
     var resultado = '';
     var partes = alfabeto.split(',');
@@ -108,7 +86,38 @@ function convertirAlfabeto() {
     alfabeto = resultado;
 }
 
+//Funcion para validar si las cadenas ingresadas son validas
+function validarCadenas() {
+    if (!validacion()) {
+        alert("Corrija el alfabeto para poder realizar esta acción.");
+        return;
+    }
 
+    var cadena1 = document.getElementById("cadena1Input").value.trim();
+    var cadena2 = document.getElementById("cadena2Input").value.trim();
+
+    //Si la cadena 1 es vacia
+    if (cadena1 === "") {
+        // y la cadena 2 no lo es
+        if (cadena2 !== "") {
+            if (!validarCadena(cadena2)) {
+                alert("Una o ambas cadenas contienen símbolos inválidos.");
+                return;
+            }
+        }
+    //o si ninguna es vacia
+    } else {
+        if (!validarCadena(cadena1) || !validarCadena(cadena2)) {
+            alert("Una o ambas cadenas contienen símbolos inválidos.");
+            return;
+        }
+    }
+
+    var relacion = determinarRelacion(cadena1, cadena2);
+    document.getElementById("relacionOutput").innerHTML = relacion;
+}
+
+//Funcion que verifica que la cadena sean validas para el alfabeto
 function validarCadena(cadena) {
     convertirAlfabeto();
 
@@ -120,6 +129,7 @@ function validarCadena(cadena) {
     return true;
 }
 
+//Funcion que recorre los casos y devuelve el resultado
 function determinarRelacion(cadena1, cadena2) {
     if (cadena1 === "") {
         if (cadena2 !== "") {
@@ -159,6 +169,7 @@ function determinarRelacion(cadena1, cadena2) {
     return "Cadena 1 no es prefijo, sufijo, subcadena ni subsecuencia de Cadena 2.";
 }
 
+//Funcion que verifica si la cadena 1 es subsecuencia de la cadena 2
 function esSubsecuencia(cadena1, cadena2) {
     var i = 0;
     var j = 0;
@@ -173,18 +184,94 @@ function esSubsecuencia(cadena1, cadena2) {
     return i === cadena1.length;
 }
 
-// Función para calcular y mostrar la potencia del alfabeto
-function calcularPotencia() {
-    var potencia = parseInt(document.getElementById("potenciaInput").value);
-    var alfabeto = document.getElementById("alfabetoInput").value.trim().split(',');
+//Funcion que genera 2 lenguajes apartir del alfabeto
+function generarLenguajes() {
+    if (!validacion()) {
+        alert("Corrija el alfabeto para poder realizar esta acción.");
+        return;
+    }
+    convertirAlfabeto();
 
-    // Expandir los rangos en el alfabeto
-    for (var i = 0; i < alfabeto.length; i++) {
-        if (alfabeto[i].includes("-")) {
-            var rangoExpandido = expandirRango(alfabeto[i]); // Expandir el rango en una cadena completa de caracteres
-            alfabeto.splice(i, 1, ...rangoExpandido.split(',')); // Reemplazar el rango con la cadena expandida en el alfabeto
+    var numPalabras = parseInt(document.getElementById('numElementosInput').value.trim());
+    var longitud = parseInt(document.getElementById('longitudInput').value.trim());
+
+    var lenguaje1 = [];
+    var lenguaje2 = [];
+
+    // Conjuntos para evitar palabras repetidas
+    var conjunto1 = new Set();
+    var conjunto2 = new Set();
+
+    // Generar palabras para el lenguaje1
+    for (var i = 0; i < numPalabras; i++) {
+        var palabra = generarPalabra(longitud);
+        while (conjunto1.has(palabra)) {
+            palabra = generarPalabra(longitud);
+        }
+        lenguaje1.push(palabra);
+        conjunto1.add(palabra);
+    }
+
+    // Generar palabras para el lenguaje2
+    for (var i = 0; i < numPalabras; i++) {
+        var palabra = generarPalabra(longitud);
+        while (conjunto2.has(palabra)) {
+            palabra = generarPalabra(longitud);
+        }
+        lenguaje2.push(palabra);
+        conjunto2.add(palabra);
+    }
+
+    document.getElementById('lenguajesOutput').innerText = "Lenguaje L1: " + lenguaje1.join(", ") + "\nLenguaje L2: " + lenguaje2.join(", ");
+
+    generarDiferencia(lenguaje1, lenguaje2);
+}
+
+// Función para generar una palabra aleatoria de longitud n
+function generarPalabra(longitud) {
+    var palabra = "";
+    for (var j = 0; j < longitud; j++) {
+        var iRand = Math.floor(Math.random() * alfabeto.length);
+        palabra += alfabeto[iRand];
+    }
+    return palabra;
+}
+
+//Funcion que genera el lenguaje resultantes del Lenguaje 1 - Lengueje 2
+function generarDiferencia(lenguaje1, lenguaje2) {
+    var diferencia = [];
+
+    // Recorrer cada palabra del lenguaje1
+    for (var i = 0; i < lenguaje1.length; i++) {
+        var palabra = lenguaje1[i];
+        var encontrada = false;
+
+        // Verificar si la palabra está en el lenguaje2
+        for (var j = 0; j < lenguaje2.length; j++) {
+            if (lenguaje2[j] === palabra) {
+                encontrada = true;
+                break;
+            }
+        }
+
+        // Si la palabra no se encuentra en el lenguaje2, agregarla a la diferencia
+        if (!encontrada) {
+            diferencia.push(palabra);
         }
     }
+
+    // Mostrar la diferencia en el elemento diferenciaOutput
+    document.getElementById('diferenciaOutput').innerText = "Diferencia entre L1 y L2: " + diferencia.join(", ");
+}
+
+// Función para calcular y mostrar la potencia del alfabeto
+function calcularPotencia() {
+    if (!validacion()) {
+        alert("Corrija el alfabeto para poder realizar esta acción.");
+        return;
+    }
+    alfabeto = enlistar();
+    var potencia = parseInt(document.getElementById("potenciaInput").value);
 
     var resultadop = "";
     if (potencia < 0) {
@@ -207,3 +294,22 @@ function calcularPotencia() {
     document.getElementById("potenciaOutput").innerHTML = resultadop;
 }
 
+function validarPlaca() {
+    var placa = document.getElementById('placaInput').value.trim().toUpperCase();
+
+    // Expresiones regulares para validar las placas según cada demarcación
+    var regexCDMX = /^[A-Z]{3}-[0-9]{3}$/; // Formato: Tres letras seguidas de un guion y tres números
+    var regexEdoMex = /^[A-Z]{3}-[0-9]{2}-[0-9]{2}$/; // Formato: Tres letras seguidas de un guion, dos números, un guion y dos números
+    var regexMorelos = /^[A-Z]{3}-[0-9]{3}-[A-Z]$/; // Formato: Tres letras seguidas de un guion, tres números y una letra
+
+    // Validar la placa utilizando las expresiones regulares
+    if (regexCDMX.test(placa)) {
+        document.getElementById('placaOutput').innerText = "La placa " + placa + " es válida para Ciudad de México.";
+    } else if (regexEdoMex.test(placa)) {
+        document.getElementById('placaOutput').innerText = "La placa " + placa + " es válida para Estado de México.";
+    } else if (regexMorelos.test(placa)) {
+        document.getElementById('placaOutput').innerText = "La placa " + placa + " es válida para Morelos.";
+    } else {
+        document.getElementById('placaOutput').innerText = "La placa " + placa + " no es válida. Por favor, ingrese una placa en un formato válido.";
+    }
+}
