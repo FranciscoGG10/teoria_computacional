@@ -4,16 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Práctica 1</title>
+
 		<script src="JS/index_script.js"></script>
+        <link rel="stylesheet" href="CSS/styles.css">    
+
     </head>
 
 <body>
         <header>
             <h2>Práctica 1:</h2> 
             <h1>Alfabetos, lenguajes y expresiones regulares </h1>
-
-            <script src="script.js"></script>
-            <link rel="stylesheet" href="styles.css">    
 
             <!--tipografias-->
             <link href="https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -28,22 +28,20 @@
             <button onclick="validarAlfabeto()">Validar Alfabeto</button><br>
 	
 		<h4>1.1. Mostrar alfabeto generado</h4>
+            <div id="alfabetocompleto"></div>
 			<button onclick="mostrarAlfabeto()">Ver Alfabeto Generado</button>
-			<br><br><div id="alfabetocompleto"></div>
 
         <h3>2. Leer dos cadenas</h3>
             <label for="cadena1Input">Cadena 1:</label>
             <input type="text" id="cadena1Input"><br>
-
             <label for="cadena2Input">Cadena 2:</label>
             <input type="text" id="cadena2Input"><br>
-
-            <button onclick="validarCadenas()">Validar Cadenas</button>
-
+            <button onclick="validarCadenas()">Validar Cadenas</button><br>
+            <div id="cadenasError"></div>
+        
         <h3>3. Relación entre cadenas</h3>
             <div id="relacionOutput"></div>
-			<br>
-			<div id="resultado"></div>
+        
 
         <h3>4. Generar lenguajes aleatorios</h3>
             <label for="numElementosInput">Número de palabras a generar:</label>

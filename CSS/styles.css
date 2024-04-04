@@ -37,7 +37,8 @@ button:hover {
     background-color: #f54462;
 }
 
-#relacionOutput, #lenguajesOutput, #diferenciaOutput, #potenciaOutput, #placaOutput {
+#lenguajesOutput, #diferenciaOutput, #potenciaOutput, #placaOutput, #alfabetocompleto, #relacionOutput {
+    font-size: x-large;
     font-weight: bold; 
     color: #4c316b; 
 }
