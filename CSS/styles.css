@@ -1,5 +1,5 @@
 header {
-    background-color:  #211e25;
+    background-color:  #26242e;
     color: #fff;
     padding: 25px;
     text-align: left;
@@ -9,6 +9,7 @@ body {
     font-family: "Rokkitt", serif;
     font-weight:400;
     font-size: large;
+    background-color: rgb(220, 228, 245);
 }
 
 h1 {
@@ -28,7 +29,8 @@ button {
     color: white; 
 
     font-family: "Rokkitt", serif;
-    font-weight:500;
+    font-weight:600;
+    font-size:medium;
 
     transition: background-color 0.3s ease; 
 }
@@ -58,4 +60,12 @@ ul {
 
 li {
     margin-bottom: 5px; 
+}
+
+#instrucciones {
+    margin-left: 50px ;
+    font-size: small;
+    font-style: italic;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
