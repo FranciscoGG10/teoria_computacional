@@ -276,30 +276,46 @@ function calcularPotencia() {
     var resultado = "";
 
     if (potencia === 0) {
-        // Manejar caso especial cuando la potencia es 0
+        // Caso especial cuando la potencia es 0
         resultado = "Σ^0 = {λ}";
     } else {
         var alfabetoCompleto = enlistar(); // Obtener el alfabeto completo
+        var combinaciones = generarCombinaciones(alfabetoCompleto, Math.abs(potencia));
 
         if (potencia > 0) {
-            // Generar las potencias positivas
-            var partesAlfabeto = alfabetoCompleto.map(function(simbolo) {
-                return simbolo.repeat(potencia); // Repetir cada símbolo la cantidad de veces indicada por la potencia
-            });
+            // Potencia positiva: usar las combinaciones generadas tal como están
+            resultado += "Σ^" + potencia + " = {" + combinaciones.join(", ") + "}";
         } else {
-            // Generar las potencias negativas
-            var partesAlfabeto = alfabetoCompleto.map(function(simbolo) {
-                return simbolo.repeat(-potencia); // Repetir cada símbolo la cantidad de veces indicada por el valor absoluto de la potencia
-            }).reverse(); // Invertir el orden de las partes para potencias negativas
+            // Potencia negativa: invertir el orden de las combinaciones
+            var combinacionesNegativas = combinaciones.slice().reverse(); // Copiar y revertir el arreglo
+            resultado += "Σ^" + potencia + " = {" + combinacionesNegativas.join(", ") + "}";
         }
-
-        // Formar la cadena de resultado con las partes generadas
-        resultado += "Σ^" + potencia + " = {" + partesAlfabeto.join(", ") + "}";
     }
 
     // Mostrar el resultado en el HTML
     document.getElementById("potenciaOutput").innerHTML = resultado;
 }
+
+// Función para generar todas las combinaciones de longitud 'n' con los símbolos del alfabeto
+function generarCombinaciones(alfabeto, longitud) {
+    var combinaciones = [];
+
+    // Función recursiva para generar todas las combinaciones
+    function generarCombinacionesRecursivo(actual) {
+        if (actual.length === longitud) {
+            combinaciones.push(actual);
+            return;
+        }
+
+        for (var i = 0; i < alfabeto.length; i++) {
+            generarCombinacionesRecursivo(actual + alfabeto[i]);
+        }
+    }
+
+    generarCombinacionesRecursivo("");
+    return combinaciones;
+}
+
 
 
 function validarPlaca() {
