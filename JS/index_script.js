@@ -266,33 +266,41 @@ function generarDiferencia(lenguaje1, lenguaje2) {
 
 // Función para calcular y mostrar la potencia del alfabeto
 function calcularPotencia() {
+    // Verificar si el alfabeto es válido
     if (!validacion()) {
         alert("Corrija el alfabeto para poder realizar esta acción.");
         return;
     }
-    alfabeto = enlistar();
     var potencia = parseInt(document.getElementById("potenciaInput").value);
 
-    var resultadop = "";
-    if (potencia < 0) {
-        // Manejar el caso de potencia negativa
-        for (var i = potencia; i <= -1; i++) {
-            var cadenaInvertida = alfabeto.join('').split('').reverse().join('');
-			resultadop += "Σ^" + i + " = " + cadenaInvertida.repeat(-i) + "<br>";
-        }
-    } else if (potencia === 0) {
-        // Manejar el caso de potencia igual a 0
-        resultadop = "Σ^0 =  ";
+    var resultado = "";
+
+    if (potencia === 0) {
+        // Manejar caso especial cuando la potencia es 0
+        resultado = "Σ^0 = {λ}";
     } else {
-        // Calcular la potencia del alfabeto y formatear el resultado
-        for (var i = 1; i <= potencia; i++) {
-            resultadop += "Σ^" + i + " = " + (alfabeto.join('')).repeat(i) + "<br>";
+        var alfabetoCompleto = enlistar(); // Obtener el alfabeto completo
+
+        if (potencia > 0) {
+            // Generar las potencias positivas
+            var partesAlfabeto = alfabetoCompleto.map(function(simbolo) {
+                return simbolo.repeat(potencia); // Repetir cada símbolo la cantidad de veces indicada por la potencia
+            });
+        } else {
+            // Generar las potencias negativas
+            var partesAlfabeto = alfabetoCompleto.map(function(simbolo) {
+                return simbolo.repeat(-potencia); // Repetir cada símbolo la cantidad de veces indicada por el valor absoluto de la potencia
+            }).reverse(); // Invertir el orden de las partes para potencias negativas
         }
+
+        // Formar la cadena de resultado con las partes generadas
+        resultado += "Σ^" + potencia + " = {" + partesAlfabeto.join(", ") + "}";
     }
 
-    // Mostrar el resultado de la potencia del alfabeto en el HTML
-    document.getElementById("potenciaOutput").innerHTML = resultadop;
+    // Mostrar el resultado en el HTML
+    document.getElementById("potenciaOutput").innerHTML = resultado;
 }
+
 
 function validarPlaca() {
     var placa = document.getElementById('placaInput').value.trim().toUpperCase();
