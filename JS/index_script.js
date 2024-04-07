@@ -35,6 +35,7 @@ function mostrarAlfabeto() {
     document.getElementById("alfabetocompleto").innerHTML = alfabetoCompleto;
 }
 
+//Funcion que agrega a un arreglo cada elemento del alfabeto
 function enlistar(){
     // Expandir por comas
     var alfabetoSplit = alfabeto.split(',');
@@ -272,23 +273,23 @@ function calcularPotencia() {
         return;
     }
     var potencia = parseInt(document.getElementById("potenciaInput").value);
-
     var resultado = "";
 
     if (potencia === 0) {
         // Caso especial cuando la potencia es 0
-        resultado = "Σ^0 = {λ}";
+        resultado = "|Σ^0| = 1<br>Σ^0 = {λ}";
     } else {
         var alfabetoCompleto = enlistar(); // Obtener el alfabeto completo
         var combinaciones = generarCombinaciones(alfabetoCompleto, Math.abs(potencia));
+        var numeroElementos = combinaciones.length;
 
         if (potencia > 0) {
             // Potencia positiva: usar las combinaciones generadas tal como están
-            resultado += "Σ^" + potencia + " = {" + combinaciones.join(", ") + "}";
+            resultado += "|Σ^" + potencia + "| = " + numeroElementos + "<br>Σ^" + potencia + " = {" + combinaciones.join(", ") + "}";
         } else {
             // Potencia negativa: invertir el orden de las combinaciones
             var combinacionesNegativas = combinaciones.slice().reverse(); // Copiar y revertir el arreglo
-            resultado += "Σ^" + potencia + " = {" + combinacionesNegativas.join(", ") + "}";
+            resultado += "|Σ^" + potencia + "| = " + numeroElementos + "<br>Σ^" + potencia + " = {" + combinacionesNegativas.join(", ") + "}";
         }
     }
 
@@ -300,22 +301,24 @@ function calcularPotencia() {
 function generarCombinaciones(alfabeto, longitud) {
     var combinaciones = [];
 
-    // Función recursiva para generar todas las combinaciones
     function generarCombinacionesRecursivo(actual) {
+        // Si la longitud de la combinación actual es igual a la longitud deseada, agregar la combinación actual al arreglo de combinaciones
         if (actual.length === longitud) {
             combinaciones.push(actual);
             return;
         }
 
+        // Generar combinaciones recursivamente añadiendo cada símbolo del alfabeto a la combinación actual y llamando de nuevo a la función recursiva
         for (var i = 0; i < alfabeto.length; i++) {
             generarCombinacionesRecursivo(actual + alfabeto[i]);
         }
     }
-
+    // Iniciar la generación de combinaciones con una cadena vacía como combinación actual
     generarCombinacionesRecursivo("");
+
+    // Retornar el arreglo de combinaciones generado
     return combinaciones;
 }
-
 
 
 function validarPlaca() {
