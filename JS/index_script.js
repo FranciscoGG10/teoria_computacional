@@ -322,7 +322,7 @@ function generarCombinaciones(alfabeto, longitud) {
 
 
 function validarPlaca() {
-    var placa = document.getElementById('placaInput').value.trim().toUpperCase();
+    var placa = document.getElementById('placaInput').value.trim();
 
     // Expresiones regulares para validar las placas según cada demarcación
     var regexCDMX = /^[A-Z]{3}-[0-9]{3}$/; // Formato: Tres letras seguidas de un guion y tres números
