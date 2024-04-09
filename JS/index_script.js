@@ -275,6 +275,11 @@ function calcularPotencia() {
     var potencia = parseInt(document.getElementById("potenciaInput").value);
     var resultado = "";
 
+    if (potencia > 5 && potencia < -5) {
+         alert("no truenes la pagina jaja saludos");
+        return;
+    } 
+
     if (potencia === 0) {
         // Caso especial cuando la potencia es 0
         resultado = "|Σ^0| = 1<br>Σ^0 = {λ}";
