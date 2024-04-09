@@ -276,7 +276,7 @@ function calcularPotencia() {
     var resultado = "";
 
     if (potencia > 5 || potencia < -5) {
-         alert("no truenes la pagina jaja saludos");
+         alert("Potencia invalida, porfavor ingrese un numero entre 5 y -5");
         return;
     } 
 
